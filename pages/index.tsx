@@ -1,23 +1,27 @@
-import WaitListForm from "../components/WaitListForm";
+import { useState, useEffect } from "react";
+import { supabase } from "../utils/supabaseClient";
+import Auth from "../components/Auth";
+import Account from "../components/Account";
+import { Session } from "@supabase/supabase-js";
 
 export default function Home() {
+  const [session, setSession] = useState<Session | null>(null);
+
+  useEffect(() => {
+    setSession(supabase.auth.session());
+
+    supabase.auth.onAuthStateChange((_event, session) => {
+      setSession(session);
+    });
+  }, []);
+
   return (
-    <div className="bg-primary flex h-screen w-full flex-col items-center">
-      <div className="flex h-12 w-full flex-row  justify-between">
-        <h1>Riga</h1>
-        <WaitListForm />
-      </div>
-      <div className="flex h-full w-full flex-col items-center justify-center">
-        <div className="flex max-w-xl flex-col py-24">
-          <h1>Less meeting</h1>
-          <h1>More doing</h1>
-          <p>
-            Asynchronous meetings powered by Claap help you reduce the number of
-            meetings needed to share updates, get feedback and make decisions.
-          </p>
-          <WaitListForm />
-        </div>
-      </div>
+    <div className="container" style={{ padding: "50px 0 100px 0" }}>
+      {!session ? (
+        <Auth />
+      ) : (
+        <Account key={session.user!.id} session={session} />
+      )}
     </div>
   );
 }
