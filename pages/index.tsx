@@ -2,13 +2,13 @@ import WaitListForm from "../components/WaitListForm";
 
 export default function Home() {
   return (
-    <div className="w-full h-screen bg-primary flex flex-col items-center">
-      <div className="w-full flex flex-row h-12  justify-between">
+    <div className="bg-primary flex h-screen w-full flex-col items-center">
+      <div className="flex h-12 w-full flex-row  justify-between">
         <h1>Riga</h1>
         <WaitListForm />
       </div>
-      <div className="w-full h-full flex flex-col items-center justify-center">
-        <div className="max-w-xl flex flex-col py-24">
+      <div className="flex h-full w-full flex-col items-center justify-center">
+        <div className="flex max-w-xl flex-col py-24">
           <h1>Less meeting</h1>
           <h1>More doing</h1>
           <p>

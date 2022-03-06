@@ -115,7 +115,7 @@ export default function Account({ session }: { session: Session }) {
 
       <div>
         <button
-          className="button block primary"
+          className="button primary block"
           onClick={() =>
             updateProfile({
               username: username || "",
